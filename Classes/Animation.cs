@@ -9,40 +9,38 @@ namespace PuranLai.Algorithms
     public interface IAnimation
     {
         void StartAnimationAsync(Action<double> action);
-        double GetSineValue(double span);
-        double GetLinearValue(double span);
     }
     public class Animation : IAnimation
     {
-        int offset;
-        int duration;
-        double start, end;
-        Func<double, double> MappingFunction;
-        unsafe double* variable;
+        static int offset;
+        static int duration;
+        static double start, end;
+        static Func<double, double> MappingFunction;
+        static unsafe double* variable;
 
         /// <summary>
         /// Initialize the Animation class.
         /// </summary>
-        /// <param name="offset">The variable controls ease options</param>
-        /// <param name="duration">The time length of the animation.</param>
-        /// <param name="start">The value of object at the start point.</param>
-        /// <param name="end">The value of object at the end point.</param>
+        /// <param name="Offset">The variable controls ease options</param>
+        /// <param name="Duration">The time length of the animation.</param>
+        /// <param name="Start">The value of object at the start point.</param>
+        /// <param name="End">The value of object at the end point.</param>
         /// <param name="mappingFunction">The function to calculate <y,x> mapping.</param>
-        /// <param name="variable">The pointer pointing to the destination variable</param>
+        /// <param name="Variable">The pointer pointing to the destination variable</param>
         public unsafe Animation
-           (int offset,
-            int duration,
-            double start,
-            double end,
+           (int Offset,
+            int Duration,
+            double Start,
+            double End,
             Func<double, double> mappingFunction,
-            double* variable = null)
+            double* Variable = null)
         {
-            this.offset = offset;
-            this.duration = duration;
-            this.start = start;
-            this.end = end;
+            offset = Offset;
+            duration = Duration;
+            start = Start;
+            end = End;
             MappingFunction = mappingFunction;
-            this.variable = variable;
+            variable = Variable;
         }
 
         /// <summary>
@@ -79,7 +77,7 @@ namespace PuranLai.Algorithms
         /// </summary>
         /// <param name="span">Time spent in StartAnimation Function.</param>
         /// <returns>The result value.</returns>
-        public double GetSineValue(double span)
+        public static double GetSineValue(double span)
         {
             double x_axis = Math.PI * span / duration / 2;
             double final = Math.PI * (offset + duration) / duration / 2;
@@ -94,7 +92,7 @@ namespace PuranLai.Algorithms
         /// </summary>
         /// <param name="span">Time spent in StartAnimation Function.</param>
         /// <returns>The result value.</returns>
-        public double GetLinearValue(double span)
+        public static double GetLinearValue(double span)
         {
             double speed = (end - start) / duration;
             double value = start + span * speed;
