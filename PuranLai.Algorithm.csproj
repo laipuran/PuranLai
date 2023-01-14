@@ -1,31 +1,32 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageProjectUrl>https://github.com/laipuran/PuranLai.Algorithm</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/laipuran/PuranLai.Algorithm</RepositoryUrl>
-    <Company>None</Company>
-    <Description>A package used to parse int from a string, and get random number(s)</Description>
-    <Copyright>This package is using the MIT License</Copyright>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>Algorithm, PuranLai, Parse, Random</PackageTags>
-    <PackageReleaseNotes>This is the first edition of this package
-See ReadMe.md</PackageReleaseNotes>
-    <PackageIcon>Icon.png</PackageIcon>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageProjectUrl>https://github.com/laipuran/PuranLai.Algorithm</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/laipuran/PuranLai.Algorithm</RepositoryUrl>
+		<Company>None</Company>
+		<Description>A package used to parse, get random numbers, and handle animation.</Description>
+		<Copyright>This package is using the MIT License</Copyright>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageTags>Algorithm, Aniamtion, Parse, Random</PackageTags>
+		<PackageReleaseNotes>See ReadMe.md</PackageReleaseNotes>
+		<PackageIcon>Icon.png</PackageIcon>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Update="Icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="Icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Update="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>
