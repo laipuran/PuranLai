@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace PuranLai.Algorithms
 {
-    internal interface IAnimation
+    public interface IAnimation
     {
         void StartAnimationAsync(Action<double> action);
         double GetSineValue(double span);
         double GetLinearValue(double span);
     }
-    internal class Animation : IAnimation
+    public class Animation : IAnimation
     {
         int offset;
         int duration;

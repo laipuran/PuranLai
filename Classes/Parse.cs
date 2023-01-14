@@ -3,7 +3,7 @@
     /// <summary>
     /// A structure of the Parse method
     /// </summary>
-    internal struct ParsingResult
+    public struct ParsingResult
     {
         public int number;
         public string message;
@@ -15,7 +15,7 @@
         }
     }
 
-    internal class Parse
+    public class Parse
     {
         /// <summary>
         /// 
@@ -51,7 +51,7 @@
 
     }
 
-    internal class CustomException : Exception
+    public class CustomException : Exception
     {
         /// <summary>
         /// An exception you can customize the message.

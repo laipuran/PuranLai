@@ -11,7 +11,7 @@ namespace PuranLai.Algorithms
         int[] GetInts();
     }
 
-    internal class Rand : IRand
+    public class Rand : IRand
     {
         public static int Count;
         public static int Max;
