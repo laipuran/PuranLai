@@ -15,13 +15,11 @@ namespace PuranLai.Algorithms
 
     public class Animation : IAnimation
     {
-#pragma warning disable CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
-        static int offset;
-        static int duration;
-        static double start, end;
-        static Func<double, Animation, double> MappingFunction;
-        static Action<double> ApplyValue;
-#pragma warning restore CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
+        public int offset;
+        public int duration;
+        public double start, end;
+        public Func<double, Animation, double> MappingFunction;
+        public Action<double> ApplyValue;
 
         /// <summary>
         /// Initialize the Animation class.
@@ -32,6 +30,7 @@ namespace PuranLai.Algorithms
         /// <param name="mappingFunction">The function to calculate <y,x> mapping.</param>
         /// <param name="applyValue">The Action to apply results.</param>
         /// <param name="Offset">The variable controls ease options</param>
+        // TODO: Flag needed
         public Animation
            (int Duration,
             double Start,
@@ -40,31 +39,33 @@ namespace PuranLai.Algorithms
             Action<double> applyValue,
             int Offset = 0)
         {
-            offset = Offset;
             duration = Duration;
             start = Start;
             end = End;
             MappingFunction = mappingFunction;
             ApplyValue = applyValue;
+            offset = Offset;
         }
 
         /// <summary>
         /// Start the animation manually.
         /// </summary>
-        /// <param name="ApplyValue">Some actions you want to do after calculating the variable.</param>
         public async void StartAnimationAsync()
         {
             DateTime now = DateTime.Now;
             TimeSpan span = TimeSpan.Zero;
             while (span.TotalMilliseconds <= (offset + duration))
             {
-                await Task.Run(() =>
+                span = DateTime.Now - now;
+                await Task.Run(async() =>
                 {
                     double time = span.TotalMilliseconds;
+                    if (time >= (duration + offset))
+                        return;
                     double value = MappingFunction(time, this);
-                    ApplyValue(value);
+                    Debug.WriteLine(time + " " + value);
+                    await Task.Run(() => { ApplyValue(value); });
                 });
-                span = DateTime.Now - now;
             }
             ApplyValue(end);
         }
@@ -76,10 +77,10 @@ namespace PuranLai.Algorithms
         /// <returns>The result value.</returns>
         public static double GetSineValue(double span, Animation animation)
         {
-            double x_axis = Math.PI * span / duration / 2;
-            double final = Math.PI * (offset + duration) / duration / 2;
-            double k = (end - start) / Math.Sin(final);
-            double value = start + Math.Sin(x_axis) * k;
+            double x_axis = Math.PI * span / animation.duration / 2;
+            double final = Math.PI * (animation.duration + animation.duration) / animation.duration / 2;
+            double k = (animation.end - animation.start) / Math.Sin(final);
+            double value = animation.start + Math.Sin(x_axis) * k;
 
             return value;
         }
@@ -91,15 +92,27 @@ namespace PuranLai.Algorithms
         /// <returns>The result value.</returns>
         public static double GetLinearValue(double span, Animation animation)
         {
-            double speed = (end - start) / duration;
-            double value = start + span * speed;
+            double speed = (animation.end - animation.start) / animation.duration;
+            double value = animation.start + span * speed;
             return value;
         }
     }
 
-    public class AnimationPool
+    public interface IAnimationPool
     {
-        private static List<Animation> animations = new();
+        void Add
+           (int Duration,
+            double Start,
+            double End,
+            Func<double, Animation, double> mappingFunction,
+            Action<double> applyValue,
+            int Offset = 0);
+        void StartAllAnimations();
+    }
+
+    public class AnimationPool : IAnimationPool
+    {
+        public List<Animation> animations = new();
 
         public AnimationPool()
         {
@@ -114,15 +127,14 @@ namespace PuranLai.Algorithms
             Action<double> applyValue,
             int Offset = 0)
         {
-            Animation animation = new Animation(Duration, Start, End, mappingFunction, applyValue, Offset);
-            animations.Add(animation);
+            animations.Add(new(Duration, Start, End, mappingFunction, applyValue, Offset));
         }
 
-        public void StartAllAnimations()
+        public async void StartAllAnimations()
         {
-            foreach (Animation animation in animations)
+            foreach (Animation animation in this.animations)
             {
-                Task.Run(animation.StartAnimationAsync);
+                await Task.Run(animation.StartAnimationAsync);
             }
         }
     }
