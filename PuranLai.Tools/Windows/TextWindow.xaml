@@ -1,0 +1,48 @@
+﻿<Window x:Class="PuranLai.Tools.TextWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PuranLai.Tools"
+        mc:Ignorable="d"
+        Width="180"
+        Height="200"
+        Background="#3c3c3c"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Loaded="Window_Loaded"
+        LostFocus="Window_LostFocus"
+        Topmost="True">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <ScrollViewer
+        HorizontalScrollBarVisibility="Hidden"
+        VerticalScrollBarVisibility="Auto">
+        <StackPanel
+            Orientation="Vertical"
+            VerticalAlignment="Top"
+            Margin="10,10,10,10">
+            <TextBlock
+                x:Name="TipTextBlock"
+                Style="{StaticResource ContentTextBlockStyle}"/>
+            <TextBox
+                Height="80"
+                Margin="0,10,0,0"
+                x:Name="ContentTextBox"
+                TextWrapping="Wrap"
+                Style="{StaticResource ContentTextBoxStyle}"/>
+            <Button
+                Margin="0,10,0,0"
+                x:Name="OKButton"
+                Content="OK"
+                Click="OKButton_Click"
+                Style="{StaticResource ContentButtonStyle}"/>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

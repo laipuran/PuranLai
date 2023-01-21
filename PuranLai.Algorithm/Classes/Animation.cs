@@ -68,8 +68,13 @@ namespace PuranLai.Algorithms
                     {
                         double time = span.TotalMilliseconds;
                         double value = this.MappingFunction(time, this);
-                        if (time > (offset + duration) || !*flag)
+                        if (time > (offset + duration))
                             return;
+                        if (flag is not null)
+                        {
+                            if (!*flag)
+                                return;
+                        }
                         Debug.WriteLine(time + " " + value);
                         ApplyValue(value);
                         return;
