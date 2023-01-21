@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PuranLai.Algorithms
+﻿namespace PuranLai.Algorithms
 {
     interface IRand
     {
@@ -13,8 +7,8 @@ namespace PuranLai.Algorithms
 
     public class Rand : IRand
     {
-        public static int Count;
-        public static int Max;
+        public int Count;
+        public int Max;
 
         public Rand(int count, int max) {
             Count = count;
@@ -29,14 +23,14 @@ namespace PuranLai.Algorithms
         {
 
             int[] array = new int[Count];
-            int[] check = new int[Rand.Max];
+            int[] check = new int[Max];
             Array.Clear(array, 0, Count);
-            Array.Clear(check, 0, Rand.Max);
+            Array.Clear(check, 0, Max);
 
             Random random = new();
             for (int i = 0; i < Count; i++)
             {
-                int nextRandom = random.Next(1, Rand.Max + 1);
+                int nextRandom = random.Next(1, Max + 1);
                 check[nextRandom - 1]++;
                 Thread.Sleep(5);
             }
@@ -44,12 +38,12 @@ namespace PuranLai.Algorithms
             bool checkValue = true;
             while (checkValue == true)
             {
-                for (int i = 0; i < Rand.Max; i++)
+                for (int i = 0; i < Max; i++)
                 {
                     if (check[i] > 1)
                     {
                         check[i]--;
-                        int temp = random.Next(1, Rand.Max + 1);
+                        int temp = random.Next(1, Max + 1);
                         check[temp - 1]++;
                     }
                 }
