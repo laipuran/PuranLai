@@ -59,6 +59,8 @@ namespace PuranLai.Algorithms
         {
             DateTime now = DateTime.Now;
             TimeSpan span = TimeSpan.Zero;
+            bool status;
+            unsafe { status = *flag; }
             while (span.TotalMilliseconds <= (offset + duration))
             {
                 span = DateTime.Now - now;
@@ -72,7 +74,7 @@ namespace PuranLai.Algorithms
                             return;
                         if (flag is not null)
                         {
-                            if (!*flag)
+                            if (*flag != status)
                                 return;
                         }
                         Debug.WriteLine(time + " " + value);
@@ -80,8 +82,23 @@ namespace PuranLai.Algorithms
                         return;
                     }
                 });
+                unsafe
+                {
+                    if (flag is not null)
+                    {
+                        if (*flag != status)
+                            break;
+                    }
+                }
             }
-            ApplyValue(end);
+            unsafe
+            {
+                if (flag is not null)
+                {
+                    if (*flag == status)
+                        ApplyValue(end);
+                }
+            }
         }
 
         /// <summary>
