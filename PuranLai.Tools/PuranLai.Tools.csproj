@@ -4,6 +4,11 @@
     <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PuranLai.Algorithm\PuranLai.Algorithm.csproj" />
+  </ItemGroup>
 
 </Project>
