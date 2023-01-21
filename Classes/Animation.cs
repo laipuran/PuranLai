@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,7 @@ namespace PuranLai.Algorithms
         public double start, end;
         public Func<double, Animation, double> MappingFunction;
         public Action<double> ApplyValue;
+        public unsafe bool* flag;
 
         /// <summary>
         /// Initialize the Animation class.
@@ -29,15 +31,17 @@ namespace PuranLai.Algorithms
         /// <param name="End">The value of object at the end point.</param>
         /// <param name="mappingFunction">The function to calculate <y,x> mapping.</param>
         /// <param name="applyValue">The Action to apply results.</param>
-        /// <param name="Offset">The variable controls ease options</param>
+        /// <param name="Offset">The variable controls ease options.</param>
+        /// <paramref name="Flag">The Boolean pointer to stop the animation.</paramref>
         // TODO: Flag needed
-        public Animation
+        public unsafe Animation
            (int Duration,
             double Start,
             double End,
             Func<double, Animation, double> mappingFunction,
             Action<double> applyValue,
-            int Offset = 0)
+            int Offset = 0,
+            bool* Flag = null)
         {
             duration = Duration;
             start = Start;
@@ -45,6 +49,7 @@ namespace PuranLai.Algorithms
             MappingFunction = mappingFunction;
             ApplyValue = applyValue;
             offset = Offset;
+            flag = Flag;
         }
 
         /// <summary>
@@ -57,14 +62,18 @@ namespace PuranLai.Algorithms
             while (span.TotalMilliseconds <= (offset + duration))
             {
                 span = DateTime.Now - now;
-                await Task.Run(async() =>
+                await Task.Run(() =>
                 {
-                    double time = span.TotalMilliseconds;
-                    if (time >= (duration + offset))
+                    unsafe
+                    {
+                        double time = span.TotalMilliseconds;
+                        double value = this.MappingFunction(time, this);
+                        if (time > (offset + duration) || !*flag)
+                            return;
+                        Debug.WriteLine(time + " " + value);
+                        ApplyValue(value);
                         return;
-                    double value = MappingFunction(time, this);
-                    Debug.WriteLine(time + " " + value);
-                    await Task.Run(() => { ApplyValue(value); });
+                    }
                 });
             }
             ApplyValue(end);
@@ -78,7 +87,7 @@ namespace PuranLai.Algorithms
         public static double GetSineValue(double span, Animation animation)
         {
             double x_axis = Math.PI * span / animation.duration / 2;
-            double final = Math.PI * (animation.duration + animation.duration) / animation.duration / 2;
+            double final = Math.PI * (animation.duration + animation.offset) / animation.duration / 2;
             double k = (animation.end - animation.start) / Math.Sin(final);
             double value = animation.start + Math.Sin(x_axis) * k;
 
@@ -119,7 +128,7 @@ namespace PuranLai.Algorithms
             animations = new();
         }
 
-        public void Add
+        public unsafe void Add
            (int Duration,
             double Start,
             double End,
