@@ -59,8 +59,13 @@ namespace PuranLai.Algorithms
         {
             DateTime now = DateTime.Now;
             TimeSpan span = TimeSpan.Zero;
-            bool status;
-            unsafe { status = *flag; }
+            bool status = true;
+            unsafe {
+                if (flag is not null)
+                {
+                    status = *flag;
+                }
+            }
             while (span.TotalMilliseconds <= (offset + duration))
             {
                 span = DateTime.Now - now;
