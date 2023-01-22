@@ -68,6 +68,14 @@ namespace PuranLai.Algorithms
             }
             while (span.TotalMilliseconds <= (offset + duration))
             {
+                unsafe
+                {
+                    if (flag is not null)
+                    {
+                        if (*flag != status)
+                            break;
+                    }
+                }
                 span = DateTime.Now - now;
                 await Task.Run(() =>
                 {
@@ -87,22 +95,6 @@ namespace PuranLai.Algorithms
                         return;
                     }
                 });
-                unsafe
-                {
-                    if (flag is not null)
-                    {
-                        if (*flag != status)
-                            break;
-                    }
-                }
-            }
-            unsafe
-            {
-                if (flag is not null)
-                {
-                    if (*flag == status)
-                        ApplyValue(end);
-                }
             }
         }
 
