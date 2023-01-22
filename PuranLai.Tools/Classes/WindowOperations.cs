@@ -8,13 +8,36 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace PuranLai.Tools.Classes
+namespace PuranLai.Tools
 {
-    public class WindowOperations
+    public static class ExtendedWindowOps
     {
-        public static unsafe void ToWhite(bool* isMouseIn, Window window)
+        public enum OpacityOptions
         {
-            *isMouseIn = true;
+            _0 = 0,
+            _1 = 1,
+            _75 = 192,
+            _25 = 64,
+        }
+
+        public static unsafe void ChangeOpacity(this Window window, OpacityOptions end, bool* isMouseIn = null)
+        {
+            if (isMouseIn is not null)
+            {
+                switch (end == OpacityOptions._75)
+                {
+                    case true:
+                        {
+                            *isMouseIn = true;
+                            break;
+                        }
+                    case false:
+                        {
+                            *isMouseIn = false;
+                            break;
+                        }
+                }
+            }
             Color color = ((SolidColorBrush)window.Background).Color;
             Action<double> SetAlpha = new((double value) =>
             {
@@ -26,12 +49,28 @@ namespace PuranLai.Tools.Classes
                 });
                 window.Dispatcher.Invoke(set, alpha);
             });
-            Animation white = new Animation(500, color.A, 128 + 64, Animation.GetLinearValue, SetAlpha, Flag: isMouseIn);
+            Animation white = new(500, color.A, (double)end, Animation.GetLinearValue, SetAlpha, Flag: isMouseIn);
             white.StartAnimationAsync();
         }
-        public static unsafe void ToTransparent(bool* isMouseIn, Window window)
+
+        public static unsafe void ChangeOpacity(this Window window, int end, bool* isMouseIn = null)
         {
-            *isMouseIn = true;
+            if (isMouseIn is not null)
+            {
+                switch (end > 128)
+                {
+                    case true:
+                        {
+                            *isMouseIn = true;
+                            break;
+                        }
+                    case false:
+                        {
+                            *isMouseIn = false;
+                            break;
+                        }
+                }
+            }
             Color color = ((SolidColorBrush)window.Background).Color;
             Action<double> SetAlpha = new((double value) =>
             {
@@ -43,7 +82,7 @@ namespace PuranLai.Tools.Classes
                 });
                 window.Dispatcher.Invoke(set, alpha);
             });
-            Animation white = new Animation(500, color.A, 64, Animation.GetLinearValue, SetAlpha, Flag: isMouseIn);
+            Animation white = new(500, color.A, end, Animation.GetLinearValue, SetAlpha, Flag: isMouseIn);
             white.StartAnimationAsync();
         }
     }
