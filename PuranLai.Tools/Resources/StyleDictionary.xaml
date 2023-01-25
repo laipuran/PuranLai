@@ -12,6 +12,7 @@
         <Setter Property="BorderThickness" Value="3"/>
         <Setter Property="Background" Value="#0091ff"/>
         <Setter Property="Foreground" Value="White"/>
+
         <Style.Triggers>
             <Trigger Property="IsMouseDirectlyOver" Value="True">
                 <Setter Property="FontWeight" Value="Regular"/>
@@ -21,11 +22,23 @@
                 <Setter Property="Background" Value="#3C8DC4"/>
             </Trigger>
         </Style.Triggers>
+
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
                 <Setter Property="CornerRadius" Value="4"></Setter>
             </Style>
+
+            <Style TargetType="{x:Type ToolTip}">
+                <Setter Property="Background" Value="#3c3c3c"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Style.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Style.Resources>
+            </Style>
         </Style.Resources>
+        
     </Style>
 
     <Style x:Key="TitleTextBlockStyle" TargetType="TextBlock">
@@ -143,14 +156,14 @@
 
     <Style x:Key="FloatingWindowStyle" TargetType="Window">
         <!--浮窗-->
-        <Setter Property="ShowInTaskbar" Value="False"/>
         <Setter Property="Opacity" Value="0.5"/>
+        <Setter Property="ShowInTaskbar" Value="False"/>
         <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="ResizeMode" Value="NoResize"/>
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
-                <Setter Property="CornerRadius" Value="5"></Setter>
+                <Setter Property="CornerRadius" Value="5"/>
             </Style>
         </Style.Resources>
     </Style>
@@ -165,7 +178,7 @@
 
     <Style x:Key="IconButton" TargetType="Button" BasedOn="{StaticResource BaseControlStyle}">
         <!--图标按钮-->
-        <Setter Property="Height" Value="45"/>
+        <Setter Property="Height" Value="40"/>
         <Setter Property="MinWidth" Value="60"/>
         <Setter Property="Padding" Value="10,0,10,0"/>
         <Setter Property="FontSize" Value="18"/>
@@ -183,5 +196,28 @@
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="RoundToolTipStyle" TargetType="ToolTip">
+        <!--圆角ToolTip-->
+        <Setter Property="Background" Value="#3c3c3c"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="5"></Setter>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style x:Key="WindowChromeButton" TargetType="Button">
+        <!--WindowChrome按钮-->
+        <Setter Property="Height" Value="17.5"/>
+        <Setter Property="Width" Value="17.5"/>
+        <!--<Setter Property="OverridesDefaultStyle" Value="True"/>-->
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Focusable" Value="False"/>
+        <!--<Setter Property="Template" Value="{Binding OverrideDefault}"/>-->
     </Style>
 </ResourceDictionary>
