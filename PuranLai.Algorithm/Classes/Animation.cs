@@ -32,8 +32,7 @@ namespace PuranLai.Algorithms
         /// <param name="mappingFunction">The function to calculate <y,x> mapping.</param>
         /// <param name="applyValue">The Action to apply results.</param>
         /// <param name="Offset">The variable controls ease options.</param>
-        /// <paramref name="Flag">The Boolean pointer to stop the animation.</paramref>
-        // TODO: Flag needed
+        /// <param name="Flag">The Boolean pointer to stop the animation.</param>
         public unsafe Animation
            (int Duration,
             double Start,
@@ -147,6 +146,9 @@ namespace PuranLai.Algorithms
             animations = new();
         }
 
+        /// <summary>
+        /// Add a new Animation (up to 3) to the AnimationPool
+        /// </summary>
         public unsafe void Add
            (int Duration,
             double Start,
@@ -158,6 +160,9 @@ namespace PuranLai.Algorithms
             animations.Add(new(Duration, Start, End, mappingFunction, applyValue, Offset));
         }
 
+        /// <summary>
+        /// Start all the animations in the AnimationPool
+        /// </summary>
         public async void StartAllAnimations()
         {
             foreach (Animation animation in this.animations)
