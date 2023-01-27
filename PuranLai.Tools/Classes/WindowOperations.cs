@@ -38,6 +38,7 @@ namespace PuranLai.Tools
                         }
                 }
             }
+
             Color color = ((SolidColorBrush)window.Background).Color;
             Action<double> SetAlpha = new((double value) =>
             {
@@ -71,6 +72,7 @@ namespace PuranLai.Tools
                         }
                 }
             }
+
             Color color = ((SolidColorBrush)window.Background).Color;
             Action<double> SetAlpha = new((double value) =>
             {
