@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PuranLai.Tools"
         mc:Ignorable="d"
-        Width="180"
+        Width="200"
         Height="200"
         Background="#3c3c3c"
         WindowStartupLocation="CenterOwner"
@@ -32,7 +32,7 @@
                 x:Name="TipTextBlock"
                 Style="{StaticResource ContentTextBlockStyle}"/>
             <TextBox
-                Height="80"
+                Height="70"
                 Margin="0,10,0,0"
                 x:Name="ContentTextBox"
                 TextWrapping="Wrap"
