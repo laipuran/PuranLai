@@ -214,7 +214,7 @@
         <!--WindowChrome按钮-->
         <Setter Property="Height" Value="17.5"/>
         <Setter Property="Width" Value="17.5"/>
-        <Setter Property="Margin" Value="2.5"/>
+        <Setter Property="Margin" Value="5,0,5,0"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="IsTabStop" Value="False"/>
