@@ -10,7 +10,8 @@
         public int Count;
         public int Max;
 
-        public Rand(int count, int max) {
+        public Rand(int count, int max)
+        {
             Count = count;
             Max = max;
         }
@@ -34,7 +35,7 @@
                 check[nextRandom - 1]++;
                 Thread.Sleep(5);
             }
-            
+
             bool checkValue = true;
             while (checkValue == true)
             {

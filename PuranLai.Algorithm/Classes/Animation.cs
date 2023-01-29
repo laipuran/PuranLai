@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace PuranLai.Algorithms
 {
@@ -59,7 +52,8 @@ namespace PuranLai.Algorithms
             DateTime now = DateTime.Now;
             TimeSpan span = TimeSpan.Zero;
             bool status = true;
-            unsafe {
+            unsafe
+            {
                 if (flag is not null)
                 {
                     status = *flag;

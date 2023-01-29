@@ -11,7 +11,7 @@
         public ParsingResult()
         {
             number = 0;
-            message= string.Empty;
+            message = string.Empty;
         }
     }
 
