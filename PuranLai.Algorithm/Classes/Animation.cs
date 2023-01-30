@@ -4,7 +4,7 @@ namespace PuranLai.Algorithms
 {
     public interface IAnimation
     {
-        void StartAnimationAsync();
+        Task<bool> StartAnimationAsync();
     }
 
     public class Animation : IAnimation
@@ -47,7 +47,7 @@ namespace PuranLai.Algorithms
         /// <summary>
         /// Start the animation manually.
         /// </summary>
-        public async void StartAnimationAsync()
+        public async Task<bool> StartAnimationAsync()
         {
             DateTime now = DateTime.Now;
             TimeSpan span = TimeSpan.Zero;
