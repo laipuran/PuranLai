@@ -89,6 +89,7 @@ namespace PuranLai.Algorithms
                     }
                 });
             }
+            return true;
         }
 
         /// <summary>
@@ -119,7 +120,7 @@ namespace PuranLai.Algorithms
         }
     }
 
-    public interface IAnimationPool
+    public interface IAnimationEnumerable
     {
         void Add
            (int Duration,
@@ -131,7 +132,7 @@ namespace PuranLai.Algorithms
         void StartAllAnimations();
     }
 
-    public class AnimationPool : IAnimationPool
+    public class AnimationPool : IAnimationEnumerable
     {
         public List<Animation> animations = new();
 
@@ -151,7 +152,42 @@ namespace PuranLai.Algorithms
             Action<double> applyValue,
             int Offset = 0)
         {
-            animations.Add(new(Duration, Start, End, mappingFunction, applyValue, Offset));
+            this.animations.Add(new(Duration, Start, End, mappingFunction, applyValue, Offset));
+        }
+
+        /// <summary>
+        /// Start all the animations in the AnimationPool
+        /// </summary>
+        public void StartAllAnimations()
+        {
+            foreach (Animation animation in animations)
+            {
+                Task.Run(animation.StartAnimationAsync);
+            }
+        }
+    }
+
+    public class AnimationQueue : IAnimationEnumerable
+    {
+        public List<Animation> animations = new();
+
+        public AnimationQueue()
+        {
+            animations = new();
+        }
+
+        /// <summary>
+        /// Add a new Animation (up to 3) to the AnimationPool
+        /// </summary>
+        public unsafe void Add
+           (int Duration,
+            double Start,
+            double End,
+            Func<double, Animation, double> mappingFunction,
+            Action<double> applyValue,
+            int Offset = 0)
+        {
+            this.animations.Add(new(Duration, Start, End, mappingFunction, applyValue, Offset));
         }
 
         /// <summary>
@@ -159,9 +195,9 @@ namespace PuranLai.Algorithms
         /// </summary>
         public async void StartAllAnimations()
         {
-            foreach (Animation animation in this.animations)
+            foreach (Animation animation in animations)
             {
-                await Task.Run(animation.StartAnimationAsync);
+                await animation.StartAnimationAsync();
             }
         }
     }
