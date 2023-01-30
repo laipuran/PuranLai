@@ -83,7 +83,7 @@ namespace PuranLai.Algorithms
                             if (*flag != status)
                                 return;
                         }
-                        Debug.WriteLine(time + " " + value);
+                        // Debug.WriteLine(time + " " + value);
                         ApplyValue(value);
                         return;
                     }
