@@ -53,7 +53,7 @@ namespace PuranLai.Tools
         {
             if (isMouseIn is not null)
             {
-                switch (end > 128)
+                switch (end >= 128)
                 {
                     case true:
                         {
