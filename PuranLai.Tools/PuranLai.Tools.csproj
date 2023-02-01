@@ -1,14 +1,40 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-  </PropertyGroup>
+	<PropertyGroup>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageProjectUrl>https://github.com/laipuran/PuranLai</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/laipuran/PuranLai</RepositoryUrl>
+		<Company>The Seekers' Team</Company>
+		<Description>A package inclu includes my Resources.</Description>
+		<Copyright>This package is using the MIT License</Copyright>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageTags>Resource, Animation</PackageTags>
+		<PackageReleaseNotes>See ReadMe.md</PackageReleaseNotes>
+		<PackageIcon>Icon.png</PackageIcon>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<Version>1.0.0</Version>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PuranLai.Algorithm\PuranLai.Algorithm.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\PuranLai.Algorithm\PuranLai.Algorithm.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Icon.png">
+	    <PackagePath>\</PackagePath>
+	    <Pack>True</Pack>
+	  </None>
+	  <None Update="README.md">
+	    <PackagePath>\</PackagePath>
+	    <Pack>True</Pack>
+	  </None>
+	</ItemGroup>
 
 </Project>

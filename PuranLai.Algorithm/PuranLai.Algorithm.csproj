@@ -2,28 +2,22 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageProjectUrl>https://github.com/laipuran/PuranLai.Algorithm</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/laipuran/PuranLai.Algorithm</RepositoryUrl>
-		<Company>None</Company>
+		<PackageProjectUrl>https://github.com/laipuran/PuranLai</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/laipuran/PuranLai</RepositoryUrl>
+		<Company>The Seekers' Team</Company>
 		<Description>A package used to parse, get random numbers, and handle animation.</Description>
 		<Copyright>This package is using the MIT License</Copyright>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageTags>Algorithm, Aniamtion, Parse, Random</PackageTags>
+		<PackageTags>Algorithm, Animation, Parse, Random</PackageTags>
 		<PackageReleaseNotes>See ReadMe.md</PackageReleaseNotes>
 		<PackageIcon>Icon.png</PackageIcon>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-		<Version>2.0.0</Version>
+		<Version>2.0.1</Version>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
-
-	<ItemGroup>
-	  <Compile Remove="Resources\**" />
-	  <EmbeddedResource Remove="Resources\**" />
-	  <None Remove="Resources\**" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<None Update="Icon.png">
