@@ -1,7 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <ControlTemplate x:Key="OverrideDefault" TargetType="{x:Type ContentControl}">
+    <ControlTemplate
+        x:Key="OverrideDefault"
+        TargetType="{x:Type ContentControl}">
         <Grid>
             <Border
                 Background="{TemplateBinding Background}"

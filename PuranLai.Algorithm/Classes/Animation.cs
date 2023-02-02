@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace PuranLai.Algorithms
+﻿namespace PuranLai.Algorithms
 {
     public interface IAnimation
     {
