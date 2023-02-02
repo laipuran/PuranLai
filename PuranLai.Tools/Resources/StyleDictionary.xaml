@@ -3,36 +3,36 @@
     <!--
         Author:         @laipuran (Puran Lai)
         Mail:           1696095803@qq.com
-        Last Update:    2023-01-27  15:27
+        Lastest Edit:   2023-02-02  13:06
     -->
-    <SolidColorBrush x:Key="ThemeColor" Color="#0091ff" Opacity="1"/>
+    <SolidColorBrush x:Key="ThemeColor" Color="#00FFFFFF" Opacity="1"/>
+    <SolidColorBrush x:Key="DefaultBorderColor" Color="Gray" Opacity="1"/>
 
     <Style x:Key="BaseControlStyle" TargetType="ContentControl">
-        <!--<Setter Property="Template" Value="{StaticResource OverrideDefault}"/>-->
-        <Setter Property="BorderBrush" Value="{DynamicResource ThemeColor}"/>
-        <Setter Property="BorderThickness" Value="2.5"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource DefaultBorderColor}"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="Padding" Value="10,3,10,3"/>
         <Setter Property="Background" Value="{DynamicResource ThemeColor}"/>
         <Setter Property="Foreground" Value="White"/>
         
-
         <Style.Triggers>
             <Trigger Property="IsMouseDirectlyOver" Value="True">
                 <Setter Property="FontWeight" Value="Regular"/>
             </Trigger>
             <Trigger Property="IsMouseDirectlyOver" Value="True">
                 <Setter Property="FontStyle" Value="Italic"/>
-                <Setter Property="Background" Value="#3C8DC4"/>
             </Trigger>
         </Style.Triggers>
 
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
-                <Setter Property="CornerRadius" Value="4"></Setter>
+                <Setter Property="CornerRadius" Value="2"></Setter>
             </Style>
 
             <Style TargetType="{x:Type ToolTip}">
                 <Setter Property="Background" Value="#3c3c3c"/>
                 <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Padding" Value="7.5"/>
                 <Style.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -82,7 +82,6 @@
     <Style x:Key="ContentButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseControlStyle}">
         <!--内容按钮-->
         <Setter Property="MinWidth" Value="60"/>
-        <Setter Property="Padding" Value="10,1.5,10,1.5"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="MaxHeight" Value="50"/>
         <Setter Property="FontWeight" Value="Bold"/>
@@ -107,14 +106,15 @@
     <Style x:Key="ContentTextBoxStyle" TargetType="TextBox">
         <!--内容文本框-->
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ThemeColor}"/>
+        <Setter Property="MinWidth" Value="165"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource DefaultBorderColor}"/>
         <Setter Property="BorderThickness" Value="3"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="MinWidth" Value="60"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="FontSize" Value="20"/>
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
-                <Setter Property="CornerRadius" Value="3"></Setter>
+                <Setter Property="CornerRadius" Value="3"/>
             </Style>
         </Style.Resources>
     </Style>
@@ -180,17 +180,16 @@
     <Style x:Key="IconButton" TargetType="Button" BasedOn="{StaticResource BaseControlStyle}">
         <!--图标按钮-->
         <Setter Property="Height" Value="40"/>
-        <Setter Property="MinWidth" Value="60"/>
-        <Setter Property="Padding" Value="10,0,10,0"/>
+        <Setter Property="MinWidth" Value="50"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <Style x:Key="ContentToggleButtonStyle" TargetType="ToggleButton" BasedOn="{StaticResource BaseControlStyle}">
         <!--内容ToggleButton-->
-        <Setter Property="MinWidth" Value="60"/>
+        <Setter Property="MinWidth" Value="50"/>
         <Setter Property="Padding" Value="10,1.5,10,1.5"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="MaxHeight" Value="50"/>
@@ -199,10 +198,11 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
-    <Style x:Key="RoundToolTipStyle" TargetType="ToolTip">
+    <Style TargetType="ToolTip">
         <!--圆角ToolTip-->
         <Setter Property="Background" Value="#3c3c3c"/>
         <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="7.5"/>
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
                 <Setter Property="CornerRadius" Value="5"></Setter>
@@ -212,12 +212,17 @@
 
     <Style x:Key="WindowChromeButton" TargetType="Button">
         <!--WindowChrome按钮-->
-        <Setter Property="Height" Value="17.5"/>
-        <Setter Property="Width" Value="17.5"/>
-        <Setter Property="Margin" Value="5,0,5,0"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="35"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Focusable" Value="False"/>
+        
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="LightGray"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>
