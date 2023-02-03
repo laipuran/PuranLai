@@ -45,7 +45,7 @@ namespace PuranLai.Tools
                 window.Dispatcher.Invoke(set, alpha);
             });
             Animation white = new(500, color.A, (double)end, Animation.GetLinearValue, SetAlpha, Flag: isMouseIn);
-            white.StartAnimationAsync();
+            Task.Run(white.StartAnimationAsync);
         }
 
         public static unsafe void ChangeOpacity(this Window window, int end, bool* isMouseIn = null)
@@ -79,7 +79,7 @@ namespace PuranLai.Tools
                 window.Dispatcher.Invoke(set, alpha);
             });
             Animation white = new(500, color.A, end, Animation.GetLinearValue, SetAlpha, Flag: isMouseIn);
-            white.StartAnimationAsync();
+            Task.Run(white.StartAnimationAsync);
         }
     }
 }
