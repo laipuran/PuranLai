@@ -22,67 +22,25 @@
         /// <returns>An int array</returns>
         public int[] GetInts()
         {
-
-            int[] array = new int[Count];
-            int[] check = new int[Max];
-            Array.Clear(array, 0, Count);
-            Array.Clear(check, 0, Max);
+            List<int> result = new List<int>();
+            Dictionary<int, int> temp= new Dictionary<int, int>();
 
             Random random = new();
-            for (int i = 0; i < Count; i++)
+            while (temp.Count <= this.Count)
             {
-                int nextRandom = random.Next(1, Max + 1);
-                check[nextRandom - 1]++;
-                Thread.Sleep(5);
+                try
+                {
+                    temp.Add(random.Next(1, this.Max + 1), 0);
+                }
+                catch { }
             }
 
-            bool checkValue = true;
-            while (checkValue == true)
+            foreach (var item in temp)
             {
-                for (int i = 0; i < Max; i++)
-                {
-                    if (check[i] > 1)
-                    {
-                        check[i]--;
-                        int temp = random.Next(1, Max + 1);
-                        check[temp - 1]++;
-                    }
-                }
-                int index = 0;
-                for (int i = 0; i < Max; i++)
-                {
-                    if (check[i] == 1 || check[i] == 0)
-                    {
-                        if (check[i] == 1)
-                        {
-                            array[index] = i + 1;
-                            index++;
-                        }
-                        if (i == Max - 1)
-                        {
-                            checkValue = false;
-                        }
-                    }
-                    else break;
-                }
-
+                result.Add(item.Key);
             }
-
-            for (int i = Count - 1; i > 0; i--)
-            {
-                for (int j = 0; j < i; j++)
-                {
-                    if (array[j] > array[j + 1])
-                    {
-                        int temp;
-                        temp = array[j + 1];
-                        array[j + 1] = array[j];
-                        array[j] = temp;
-                    }
-                }
-            }
-
-            return array;
+            result.Sort();
+            return result.ToArray();
         }
     }
 
